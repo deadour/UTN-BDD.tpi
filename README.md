@@ -109,7 +109,7 @@ transferencia terminada.
 
 Modelamos el siguiente modelo entidad relación para el escenario:
 
-![DER TPI](https://raw.githubusercontent.com/deadour/BDD-TPI/master/src/Diagrama%20Entidad%20Relación.png)
+![DER TPI](https://raw.githubusercontent.com/deadour/BDD-TPI/master/docs/Diagrama%20Entidad%20Relación.png)
 
 Puede verse más a detalle en 🔗[draw.io](https://drive.google.com/file/d/1C_JBskfHOxcKy5gQI_Ss0E70aFCfRe8M/view?usp=sharing)
 
@@ -526,8 +526,17 @@ Una vez cargadas las tablas con datos, se realizan las siguientes consultas:
 
 ## Desarrollo
 
-- **🔗[Diagrama Entidad-Relación](https://github.com/deadour/BDD-TPI/blob/main/src/Diagrama%20Entidad%20Relaci%C3%B3n.png)**
+- **🔗[Diagrama Entidad-Relación](https://github.com/deadour/BDD-TPI/blob/main/docs/Diagrama%20Entidad%20Relación.png)**
 - **🔗[Documentación](https://github.com/deadour/BDD-TPI/blob/main/docs/%5BG1%5D%20TPI%20-%20Escenario%20Farmacia.pdf)**
-- **🔗[Scripts SQL](https://github.com/deadour/BDD-TPI/blob/main/src/)**
+- **🔗[Scripts SQL:](https://github.com/deadour/BDD-TPI/tree/main/src/scripts)**
+
+
+     [`creacion.sql`](https://github.com/deadour/BDD-TPI/blob/main/src/scripts/creacion.sql): contiene todos los scripts para crear las tablas.
+
+     [`dbCompleta.sql`](https://github.com/deadour/BDD-TPI/blob/main/src/scripts/dbCompleta.sql): contiene todos los scripts para crear las tablas y rellenarlas.
+
+     [`consultas.sql`](https://github.com/deadour/BDD-TPI/blob/main/src/scripts/consultas.sql): contiene todas las consultas comentadas, por separado.
+
 - **🔗[Consultas - Screenshots](https://github.com/deadour/BDD-TPI/tree/main/img)**
+
 
