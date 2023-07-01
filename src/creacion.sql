@@ -85,7 +85,7 @@ CREATE TABLE Empleados (
   idFarm INTEGER NOT NULL,
   nombre VARCHAR(50),
   f_ingreso DATE,
-  salario: FLOAT,
+  salario FLOAT,
   PRIMARY KEY(cuit),
   FOREIGN KEY (idFarm) REFERENCES Farmacia(idFarm)
   ON DELETE NO ACTION  
@@ -109,7 +109,7 @@ CREATE TABLE Comprobantes (
   ON UPDATE NO ACTION,
   FOREIGN KEY (idFarm) REFERENCES Farmacia(idFarm)
   ON DELETE CASCADE
-  ON UPDATE NO ACTION;
+  ON UPDATE NO ACTION
 );
 
 CREATE TABLE Ingresos (
