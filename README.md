@@ -1,20 +1,19 @@
-
 # TPI - Base de Datos
 
 
 Trabajo Práctico Integrador de la materia Base de Datos, del tercer nivel de la carrera Ingeniería en Sistemas de Información.
-Dicho trabajo consiste en crear una base de datos con sus respectivas tablas, crear consultas SQL basicas y complejas sobre un escenario aplicable a la vida real. En este caso, una farmacia.
+Dicho trabajo consiste en crear una base de datos con sus respectivas tablas, crear consultas SQL basicas y complejas sobre un escenario aplicable a la vida real.
 
-Para la realización del trabajo hemos seguido un enfoque integral que abarca desde la creación de tablas y el diseño del esquema físico hasta la implementación de funcionalidades para inserción y modificación masiva de datos. A continuación, se detallan las principales etapas del proyecto:
+Para la realización del trabajo hemos seguido un enfoque integral que abarca desde el modelado del diagrama Entidad Relacion, la creacion de tablas y el diseño del esquema físico hasta la implementación de funcionalidades para inserción y modificación masiva de datos.
 
-En primer lugar, se crearon las tablas necesarias en la base de datos. Estas tablas se diseñaron cuidadosamente de acuerdo con los requisitos del sistema y la estructura de los datos que íbamos a almacenar.
+En primer lugar, se diseñó el diagrama entidad-relación del escenario propuesto, que nos permitió visualizar las entidades, atributos y relaciones del sistema. A partir de este diagrama, se procedió a convertirlo en un esquema relacional, definiendo las tablas y estableciendo las relaciones entre ellas. Luego, se tradujo este esquema relacional al lenguaje SQL para crear las tablas en la base de datos MySQL.
 
-Para interactuar con la base de datos MySQL, se utilizó el lenguaje de programación Python. Se emplearon las librerías "mysql.connector" para establecer la conexión con la base de datos y manejar las consultas y transacciones necesarias. Estas librerías facilitaron la comunicación fluida entre nuestro programa en Python y la base de datos MySQL.
+Una vez creadas las tablas, se procedió a cargar los datos de forma masiva utilizando el lenguaje de programación Python. Para ello, se utilizó la librería "mysql.connector" para establecer la conexión con la base de datos y realizar las operaciones necesarias. Se implementaron scripts en Python que generaron datos aleatorios y ficticios utilizando las librerías "random" y "faker". Estas herramientas nos permitieron simular un entorno realista con una gran cantidad de registros. Además, se utilizó el módulo "datetime" para manejar datos de tipo fecha de manera eficiente.
 
-Además, se implementaron funcionalidades de inserción y modificación masiva de datos utilizando Python. Para generar valores aleatorios, se utilizó la librería "random", que nos permitió generar datos aleatorios para aquellos casos en los que era necesario. Para generar valores ficticios para datos como nombres, direcciones, etc., se empleó la librería "faker". Esta librería nos brindó la capacidad de generar datos ficticios que simularan la información real de manera confiable.
+Una vez cargados los datos, se procedió a implementar consultas SQL para realizar operaciones de inserción, modificación y eliminación de datos. Se utilizaron consultas simples y consultas más complejas que involucraron subconsultas y operaciones de actualización en varias tablas. Estas consultas se ejecutaron utilizando la conexión establecida previamente con la base de datos MySQL desde Python.
 
-Asimismo, se utilizaron elementos del lenguaje Python como la importación de la clase "date" y el módulo "timedelta" de la librería "datetime" para manejar datos de tipo fecha. Esto nos permitió trabajar con fechas y calcular intervalos de tiempo según fuera necesario en el proyecto.
 
+En conclusión, este enfoque integral nos permitió aplicar los conocimientos adquiridos en la materia y desarrollar un proyecto que simula un escenario real de gestión de una cadena de farmacias.
 
 
 
