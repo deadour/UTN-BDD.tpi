@@ -1,5 +1,5 @@
---------------Consultas UPDATE
---1.	Aplicar el descuento según el tipo de afiliado al precio total de todos los comprobantes
+-- Consultas UPDATE
+-- 1.	Aplicar el descuento según el tipo de afiliado al precio total de todos los comprobantes
 UPDATE comprobantes c
 JOIN (
     SELECT c.num,
@@ -13,20 +13,19 @@ JOIN (
 SET c.total = t.total;
  
  
---2.	A aquellos empleados que tienen una antigüedad mayor a 5 años aumentar un 20% eL salario
+-- 2.	A aquellos empleados que tienen una antigüedad mayor a 5 años aumentar un 20% eL salario
 UPDATE Empleados
 SET salario = salario * 1.20
-WHERE f_ingreso <= DATE_SUB(CURDATE(), INTERVAL 5 YEAR);
-  
+WHERE f_ingreso <= DATE_SUB(CURDATE(), INTERVAL 5 YEAR) ;
 
---3.	 A los medicamentos comercializados por Biogen incrementar su precio en un 13%.
+-- 3.	 A los medicamentos comercializados por Biogen incrementar su precio en un 13%.
 UPDATE Medicamentos
 JOIN Laboratorios ON Medicamentos.CUIT = Laboratorios.CUIT
 SET Medicamentos.precio = Medicamentos.precio * 1.13
 WHERE Laboratorios.razonSocial = 'Biogen';
 
  
---4.	A aquellas farmacias que le corresponden el día de guardia “Lunes” cambiarlo por el día “Miércoles” o viceversa.
+-- 4.	A aquellas farmacias que le corresponden el día de guardia “Lunes” cambiarlo por el día “Miércoles” o viceversa.
 UPDATE farmacia f
 JOIN (
     SELECT f.idFarm,
@@ -36,10 +35,10 @@ JOIN (
         END AS diasGuardia
     FROM farmacia f
 ) t ON f.idFarm = t.idFarm
-SET f.diasGuardia = t.diasGuardia;
- 
+SET f.diasGuardia = t.diasGuardia
+;
  
---5.	Realizar un descuento del 15% a los 10 medicamentos menos vendidos de todas las farmacias.
+-- 5.	Realizar un descuento del 15% a los 10 medicamentos menos vendidos de todas las farmacias.
 UPDATE medicamentos m
 JOIN(
     SELECT m.cod, (m.precio*0.9) as precio
@@ -61,13 +60,12 @@ JOIN (  SELECT a.id_af
         FROM asociado a 
         GROUP BY a.id_af
         HAVING COUNT(*)>=3) as aux ON aux.id_af=c.id_cr
-SET c.descuento=60;
+SET c.descuento=60
 
- 
+;
 
- 
---------------Consultas INSERT
---1.	Insertar en transportaA una nueva relación que vincule a la ciudad de resistencia con uno de los transportista que menor cantidad de envíos haya realizado en el último trimestre.
+-- Consultas INSERT
+-- 1.	Insertar en transportaA una nueva relación que vincule a la ciudad de resistencia con uno de los transportista que menor cantidad de envíos haya realizado en el último trimestre.
 INSERT INTO transportaa (codT, codpost) VALUES((SELECT i.codT
 FROM ingresos i
 WHERE (30*3) >= DATEDIFF(CURRENT_DATE, i.fecha) AND i.estado = 'finalizado'
@@ -85,11 +83,11 @@ ORDER BY i.codT
 LIMIT 1
 ),
 (SELECT c.codpost FROM ciudad c WHERE c.nombre = 'Resistencia')
-);
+)
 
-  
+ ;
 
---2.	Si existe algún paciente crónico con 4 o más diagnósticos, crear un nuevo diagnóstico llamado Por morir y asociar a todos los que estén en esa condición
+-- 2.	Si existe algún paciente crónico con 4 o más diagnósticos, crear un nuevo diagnóstico llamado Por morir y asociar a todos los que estén en esa condición
 -- Obtener el siguiente número de diagnóstico
 SELECT MAX(codDiag) + 1 INTO @siguienteCodDiag FROM Diagnostico;
 
@@ -109,10 +107,9 @@ SELECT @siguienteCodDiag, id_af, CURDATE()
 FROM asociado a
 GROUP BY a.id_af
 HAVING COUNT(*) >= 4
+;
 
-  
-
---3.	Crear un nuevo comprobante para Bernardino Chamorro que realizo una compra en la farmacia con idFarm = 1
+-- 3.	Crear un nuevo comprobante para Bernardino Chamorro que realizo una compra en la farmacia con idFarm = 1
 INSERT INTO comprobantes (num, id_af, id_cr, fecha, total, idFarm, subtotal) VALUES (
     (SELECT MAX(c1.num) + 1 FROM comprobantes c1),
     (SELECT a.id_af FROM afiliado a WHERE a.NyA LIKE 'Bernardino%Chamorro'),
@@ -120,15 +117,15 @@ INSERT INTO comprobantes (num, id_af, id_cr, fecha, total, idFarm, subtotal) VAL
     );
 
  
---4.	Insertar nuevo laboratorio
+-- 4.	Insertar nuevo laboratorio
 INSERT INTO Laboratorios (CUIT, razonSocial, domicilio) VALUES ('1234567890', 'LabUrquiza', '420 pasaje Bosch, Corrientes, Argentina');
  
---5.	Insertar nueva Farmacia
+-- 5.	Insertar nueva Farmacia
 INSERT INTO farmacia (idFarm, codpost, diasGuardia, direccion) VALUES (49, 1500, 'martes', 'San martin 324 Chaco');
-  
+;
 
---6.	Crear un nuevo ingreso de 10 unidades del medicamento IBUPROFENO ILAB 600 comercializado por el laboratorio BioGen y que será transportado por Rivas PLC.
-SELECT MAX(codI) INTO @ultimoCodI FROM ingresos;
+-- 6.	Crear un nuevo ingreso de 10 unidades del medicamento IBUPROFENO ILAB 600 comercializado por el laboratorio BioGen y que será transportado por Rivas PLC.
+SELECT MAX(codI) INTO @ultimoCodI FROM ingresos,
 INSERT INTO ingresan (codI, cod, cantidad)
 INSERT INTO ingresos (codI, CUIT, codT, fecha, estado) VALUES (
     (SELECT MAX(i.codI) + 1  FROM ingresos i),
@@ -148,20 +145,20 @@ SELECT @ultimoCodI,
  ,10;
  
  
---------------Consultas DELETE
+-- -----------Consultas DELETE
 
---1.	Borrar comprobantes que tengan una antigüedad mayor a 5 años y estén asociados a un afiliado eventual.
+-- 1.	Borrar comprobantes que tengan una antigüedad mayor a 5 años y estén asociados a un afiliado eventual.
 DELETE FROM comprobantes c WHERE datediff(CURRENT_DATE, c.fecha) >= (365*5) AND c.id_af IS NOT NULL;
  
 
---2.	Eliminar las monodrogas que no compongan ningún medicamento.
+-- 2.	Eliminar las monodrogas que no compongan ningún medicamento.
 DELETE FROM Monodroga
 WHERE nombreCientifico NOT IN (
   SELECT nombreCientifico FROM compuesto
 );
  
 
---3.	La sucursal de Resistencia ha sido dada de baja. Eliminar empleados vinculados a la farmacia de la ciudad de Resistencia que hayan trabajado por menos de dos años:
+-- 3.	La sucursal de Resistencia ha sido dada de baja. Eliminar empleados vinculados a la farmacia de la ciudad de Resistencia que hayan trabajado por menos de dos años:
 
 DELETE FROM Empleados
 WHERE idFarm IN (SELECT idFarm FROM Farmacia WHERE codpost IN (SELECT codpost FROM Ciudad WHERE nombre = 'Resistencia')) 
@@ -170,14 +167,14 @@ AND DATEDIFF(CURDATE(), f_ingreso) < 730;
  
 
 
---4.	Borrar todos los afiliados que no tienen ninguna enfermedad crónica y que se afiliaron hace más de 5 años:
+-- 4.	Borrar todos los afiliados que no tienen ninguna enfermedad crónica y que se afiliaron hace más de 5 años:
 
 DELETE FROM Afiliado
 WHERE id_af NOT IN (SELECT id_af FROM Asociado)
 AND f_ing < DATE_SUB(CURDATE(), INTERVAL 5 YEAR);
 
  
---5.	Eliminar ingresos que tengan el estado finalizado y sean de hace más de 365 días:
+-- 5.	Eliminar ingresos que tengan el estado finalizado y sean de hace más de 365 días:
 
 DELETE FROM ingresos i
 WHERE datediff(CURRENT_DATE, i.fecha)>=365 AND i.estado = 'pendiente';
@@ -185,20 +182,20 @@ WHERE datediff(CURRENT_DATE, i.fecha)>=365 AND i.estado = 'pendiente';
 
  
 
---6.	 Borrar todos los afiliados que no tienen ninguna enfermedad crónica y que viven en una localidad específica:
+-- 6.	 Borrar todos los afiliados que no tienen ninguna enfermedad crónica y que viven en una localidad específica:
 
 DELETE FROM Afiliado WHERE id_af NOT IN (SELECT id_af FROM Asociado) AND localidad = 'Sevilla';
 
  
---------------Consultas SELECT
-1.	Mostrar el ranking de los diez medicamentos con mayor cantidad de ventas en todas las farmacias de la cadena. 
+-- ------------Consultas SELECT
+-- 1.	Mostrar el ranking de los diez medicamentos con mayor cantidad de ventas en todas las farmacias de la cadena. 
 SELECT m.cod, m.nombreComer, SUM(i.cantidad) as Vendido
 FROM medicamentos m NATURAL JOIN incluye1 i NATURAL JOIN comprobantes c
 GROUP BY m.cod
 ORDER BY Vendido DESC
 LIMIT 10;
  
---2.	 Listar los códigos y nombres de los medicamentos que fueron vendidos en todas las farmacias. 
+-- 2.	 Listar los códigos y nombres de los medicamentos que fueron vendidos en todas las farmacias. 
 SELECT m.cod
 FROM medicamentos m
 WHERE NOT EXISTS(
@@ -211,13 +208,13 @@ WHERE NOT EXISTS(
 )
 ORDER BY m.cod ASC;
  
---3.	Mostrar la cantidad de afiliados crónicos y eventuales que compraron medicamentos en la farmacia de Resistencia en la última semana.
+-- 3.	Mostrar la cantidad de afiliados crónicos y eventuales que compraron medicamentos en la farmacia de Resistencia en la última semana.
 SELECT c1.nombre ,COUNT(c.id_af) as 'Ventas a eventuales', COUNT(c.id_cr) as 'Ventas a Cronicos'
 FROM comprobantes c NATURAL JOIN farmacia f NATURAL JOIN ciudad c1
 WHERE c1.nombre = 'resistencia' AND 7 >= DATEDIFF(CURRENT_DATE, c.fecha);
   
 
---4.	 Informar el top de las 5 farmacias que solicitaron mayores cantidades de amoxidal duo en los últimos 15 días. 	
+-- 4.	 Informar el top de las 5 farmacias que solicitaron mayores cantidades de amoxidal duo en los últimos 15 días. 	
 SELECT f.idFarm, t.cantidad
 FROM farmacia f NATURAL JOIN solicita s NATURAL JOIN (SELECT t1.num ,DATEDIFF(CURRENT_DATE, t1.fecha) AS dias FROM transferencia t1)t1 NATURAL JOIN transfiere t NATURAL JOIN medicamentos m
 WHERE m.nombreComer = 'AMOXIDAL DUO' AND 15 >= t1.dias
@@ -225,7 +222,7 @@ ORDER BY t.cantidad DESC
 LIMIT 5;
 
  
---5.	Listado de farmacias con la menor cantidad de transferencias pendientes.
+-- 5.	Listado de farmacias con la menor cantidad de transferencias pendientes.
 SELECT s.idFarm, count(*) as 'cantidad pendiente'
 FROM transferencia t NATURAL JOIN solicita s
 WHERE t.estado = 'pendiente'
@@ -237,7 +234,7 @@ WHERE t.estado = 'pendiente'
 GROUP BY s.idFarm) a);
   
 
---6.	 Identificar para una farmacia determinada cuales son los medicamentos sin stock en la misma pero con stock en deposito central 
+-- 6.	 Identificar para una farmacia determinada cuales son los medicamentos sin stock en la misma pero con stock en deposito central 
 SELECT p1.idFarm,  m.nombreComer, p1.cantidad, m.stockEnDep
 FROM medicamentos m NATURAL JOIN posee1 p1
 WHERE p1.Cantidad = 0 AND m.stockEnDep > 0;
@@ -245,7 +242,7 @@ WHERE p1.Cantidad = 0 AND m.stockEnDep > 0;
  
  
 
---7.	¿Cuál es la empresa de transporte con mayor actividad en el último mes? 
+-- 7.	¿Cuál es la empresa de transporte con mayor actividad en el último mes? 
 SELECT i.codT, COUNT(*) as envios
 FROM ingresos i
 WHERE 30 >= DATEDIFF(CURRENT_DATE, i.fecha) AND i.estado = 'finalizado'
@@ -261,7 +258,7 @@ HAVING COUNT(*) = (
 );
   
 
---8.	Informar el monto total de ventas por farmacia en el último trimestre ordenado en forma descendente.
+-- 8.	Informar el monto total de ventas por farmacia en el último trimestre ordenado en forma descendente.
 SELECT c.idFarm, ROUND(SUM(c.total), 0) AS ganancias
 FROM comprobantes c
 WHERE 90 >= DATEDIFF(CURRENT_DATE,c.fecha)
