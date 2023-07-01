@@ -473,7 +473,7 @@ CREATE TABLE Solicita (
 
 - Utilizando alguna herramienta para generación de datos, importar masivamente filas a las tablas indicadas. Tener en cuenta que se intenta trabajar con volúmenes importantes similares a un sistema real, por lo que deberá asegurarse que al menos una tabla cuente con más de 100.000 registros.
 
-### Cargado de tablas
+### Inserción de datos
 
 Para cargar masivamente las tablas, se utlizó el lenguaje Python, con las librerías "random", "faker", "datetime" y "mysql.connector". "random" y "faker" permitieron generar valores aleatorios y datos ficticios, mientras que "datetime" facilitó el manejo de datos de tipo fecha. Por otro lado, "mysql.connector" brindó las herramientas necesarias para establecer la conexión con la base de datos MySQL y realizar operaciones en ella. Estas librerías en conjunto fueron fundamentales para llevar a cabo la generación y modificación masiva de datos en el proyecto.
 
