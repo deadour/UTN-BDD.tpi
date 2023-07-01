@@ -489,3 +489,10 @@ Una vez cargadas las tablas con datos, se realizan las siguientes consultas:
 - Informar el monto total de ventas por farmacia en el último trimestre ordenado en forma descendente.
 
 
+
+## Desarrollo
+
+- **🔗[Diagrama Entidad-Relación](https://github.com/deadour/BDD-TPI/blob/main/src/Diagrama%20Entidad%20Relaci%C3%B3n.png)**
+- **🔗[Documentación](https://github.com/deadour/BDD-TPI/blob/main/docs/%5BG1%5D%20TPI%20-%20Escenario%20Farmacia.pdf)**
+- **🔗[Scripts SQL](https://github.com/deadour/BDD-TPI/blob/main/src/scripts.sql)**
+
