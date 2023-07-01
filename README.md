@@ -1,4 +1,4 @@
-# TPI - Base de Datos
+# TPI - Bases de Datos
 
 
 Trabajo Práctico Integrador de la materia Base de Datos, del tercer nivel de la carrera Ingeniería en Sistemas de Información.
