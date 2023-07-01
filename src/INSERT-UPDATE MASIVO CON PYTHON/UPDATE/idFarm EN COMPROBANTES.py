@@ -1,4 +1,3 @@
---> para modificar los id farmacia de comprobantes
 from mysql.connector import Error
 import mysql.connector
 import random
