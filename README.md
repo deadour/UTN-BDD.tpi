@@ -528,6 +528,6 @@ Una vez cargadas las tablas con datos, se realizan las siguientes consultas:
 
 - **🔗[Diagrama Entidad-Relación](https://github.com/deadour/BDD-TPI/blob/main/src/Diagrama%20Entidad%20Relaci%C3%B3n.png)**
 - **🔗[Documentación](https://github.com/deadour/BDD-TPI/blob/main/docs/%5BG1%5D%20TPI%20-%20Escenario%20Farmacia.pdf)**
-- **🔗[Scripts SQL](https://github.com/deadour/BDD-TPI/blob/main/src/scripts.sql)**
+- **🔗[Scripts SQL](https://github.com/deadour/BDD-TPI/blob/main/src/)**
 - **🔗[Consultas - Screenshots](https://github.com/deadour/BDD-TPI/tree/main/img)**
 
