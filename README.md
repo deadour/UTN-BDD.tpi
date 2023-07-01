@@ -5,7 +5,15 @@
 Trabajo Práctico Integrador de la materia Base de Datos, del tercer nivel de la carrera Ingeniería en Sistemas de Información.
 Dicho trabajo consiste en crear una base de datos con sus respectivas tablas, crear consultas SQL basicas y complejas sobre un escenario aplicable a la vida real. En este caso, una farmacia.
 
+Para la realización del trabajo hemos seguido un enfoque integral que abarca desde la creación de tablas y el diseño del esquema físico hasta la implementación de funcionalidades para inserción y modificación masiva de datos. A continuación, se detallan las principales etapas del proyecto:
 
+En primer lugar, se crearon las tablas necesarias en la base de datos. Estas tablas se diseñaron cuidadosamente de acuerdo con los requisitos del sistema y la estructura de los datos que íbamos a almacenar.
+
+Para interactuar con la base de datos MySQL, se utilizó el lenguaje de programación Python. Se emplearon las librerías "mysql.connector" para establecer la conexión con la base de datos y manejar las consultas y transacciones necesarias. Estas librerías facilitaron la comunicación fluida entre nuestro programa en Python y la base de datos MySQL.
+
+Además, se implementaron funcionalidades de inserción y modificación masiva de datos utilizando Python. Para generar valores aleatorios, se utilizó la librería "random", que nos permitió generar datos aleatorios para aquellos casos en los que era necesario. Para generar valores ficticios para datos como nombres, direcciones, etc., se empleó la librería "faker". Esta librería nos brindó la capacidad de generar datos ficticios que simularan la información real de manera confiable.
+
+Asimismo, se utilizaron elementos del lenguaje Python como la importación de la clase "date" y el módulo "timedelta" de la librería "datetime" para manejar datos de tipo fecha. Esto nos permitió trabajar con fechas y calcular intervalos de tiempo según fuera necesario en el proyecto.
 
 
 
@@ -466,17 +474,44 @@ CREATE TABLE Solicita (
 
 - Utilizando alguna herramienta para generación de datos, importar masivamente filas a las tablas indicadas. Tener en cuenta que se intenta trabajar con volúmenes importantes similares a un sistema real, por lo que deberá asegurarse que al menos una tabla cuente con más de 100.000 registros.
 
+### Cargado de tablas
+
+Para cargar masivamente las tablas, se utlizó el lenguaje Python, con las librerías "random", "faker", "datetime" y "mysql.connector". "random" y "faker" permitieron generar valores aleatorios y datos ficticios, mientras que "datetime" facilitó el manejo de datos de tipo fecha. Por otro lado, "mysql.connector" brindó las herramientas necesarias para establecer la conexión con la base de datos MySQL y realizar operaciones en ella. Estas librerías en conjunto fueron fundamentales para llevar a cabo la generación y modificación masiva de datos en el proyecto.
+
+- **👩‍💻[Generador Python](https://github.com/deadour/BDD-TPI/tree/main/src/generatorPython)**
 
 
 ### Consultas SQL 
 
 #### INSERCIÓN, MODIFICACIÓN, BORRADO DE DATOS 
 Una vez cargadas las tablas con datos, se realizan las siguientes consultas:
-- seis consultas distintas para inserción de datos (distintos a los ya cargados en forma masiva), 
-- seis consultas distintas para modificación de datos, 
-- seis consultas sql distintas para borrado de filas. 
- Las consultas pueden ser ejecutadas sobre una misma tabla o distintas, pero todas deben cumplir condiciones medianamente complejas para ejecutarse (por ej. buscar valores en una tabla relacionada mediante una subconsulta). 
 
+
+#### CONSULTAS UPDATE
+- Aplicar el descuento según el tipo de afiliado al precio total de todos los comprobantes.
+- A aquellos empleados que tienen una antigüedad mayor a 5 años aumentar un 20% el salario.
+-  A los medicamentos comercializados por Biogen incrementar su precio en un 13%.
+- A aquellas farmacias que le corresponden el día de guardia “Lunes” cambiarlo por el día “Miércoles” o viceversa.
+- Realizar un descuento del 15% a los 10 medicamentos menos vendidos de todas las farmacias.
+- A aquellos socios Crónicos que tengan más de 3 diagnósticos, bajarles el descuento a un 60%.
+
+#### CONSULTAS INSERT
+- Insertar en transportaA una nueva relación que vincule a la ciudad de resistencia con uno de los transportista que menor cantidad de envíos haya realizado en el último trimestre.
+- Si existe algún paciente crónico con 4 o más diagnósticos, crear un nuevo diagnóstico llamado Por morir y asociar a todos los que estén en esa condición.
+- Crear un nuevo comprobante para Bernardino Chamorro que realizo una compra en la farmacia con idFarm = 1.
+- Insertar nuevo laboratorio.
+- Insertar nueva Farmacia.
+- Crear un nuevo ingreso de 10 unidades del medicamento IBUPROFENO ILAB 600 comercializado por el laboratorio BioGen y que será transportado por Rivas PLC.
+
+
+#### CONSULTAS DELETE
+
+- Borrar comprobantes que tengan una antigüedad mayor a 5 años y estén asociados a un afiliado eventual.
+- Eliminar las monodrogas que no compongan ningún medicamento.
+- La sucursal de Resistencia ha sido dada de baja. Eliminar empleados vinculados a la farmacia de la ciudad de Resistencia que hayan trabajado por menos de dos años.
+- Borrar todos los afiliados que no tienen ninguna enfermedad crónica y que se afiliaron hace más de 5 años.
+- Eliminar ingresos que tengan el estado finalizado y sean de hace más de 365 días.
+- Borrar todos los afiliados que no tienen ninguna enfermedad crónica y que viven en una localidad específica.
 
 #### CONSULTAS SELECT 
 - Mostrar el ranking de los diez medicamentos con mayor cantidad de ventas en todas las farmacias de la cadena. 
@@ -495,4 +530,5 @@ Una vez cargadas las tablas con datos, se realizan las siguientes consultas:
 - **🔗[Diagrama Entidad-Relación](https://github.com/deadour/BDD-TPI/blob/main/src/Diagrama%20Entidad%20Relaci%C3%B3n.png)**
 - **🔗[Documentación](https://github.com/deadour/BDD-TPI/blob/main/docs/%5BG1%5D%20TPI%20-%20Escenario%20Farmacia.pdf)**
 - **🔗[Scripts SQL](https://github.com/deadour/BDD-TPI/blob/main/src/scripts.sql)**
+- **🔗[Consultas - Screenshots](https://github.com/deadour/BDD-TPI/tree/main/img)**
 
