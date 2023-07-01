@@ -125,8 +125,9 @@ INSERT INTO farmacia (idFarm, codpost, diasGuardia, direccion) VALUES (49, 1500,
 ;
 
 -- 6.	Crear un nuevo ingreso de 10 unidades del medicamento IBUPROFENO ILAB 600 comercializado por el laboratorio BioGen y que será transportado por Rivas PLC.
-SELECT MAX(codI) INTO @ultimoCodI FROM ingresos,
-INSERT INTO ingresan (codI, cod, cantidad)
+SELECT MAX(codI) INTO @ultimoCodI FROM ingresos;
+
+
 INSERT INTO ingresos (codI, CUIT, codT, fecha, estado) VALUES (
     (SELECT MAX(i.codI) + 1  FROM ingresos i),
     (SELECT l.CUIT
@@ -138,17 +139,20 @@ INSERT INTO ingresos (codI, CUIT, codT, fecha, estado) VALUES (
     CURRENT_DATE,
     'pendiente'
 );
+
+INSERT INTO ingresan (codI, cod, cantidad)
 SELECT @ultimoCodI,
  (SELECT m.cod
   FROM medicamentos m
   WHERE m.nombreComer = 'IBUPROFENO ILAB 600')
- ,10;
- 
- 
+ ,10
+;
 -- -----------Consultas DELETE
 
 -- 1.	Borrar comprobantes que tengan una antigüedad mayor a 5 años y estén asociados a un afiliado eventual.
-DELETE FROM comprobantes c WHERE datediff(CURRENT_DATE, c.fecha) >= (365*5) AND c.id_af IS NOT NULL;
+
+DELETE FROM `comprobantes` WHERE datediff(CURRENT_DATE, comprobantes.fecha) >= (365*5) AND comprobantes.id_af IS NOT NULL;
+
  
 
 -- 2.	Eliminar las monodrogas que no compongan ningún medicamento.
@@ -176,8 +180,8 @@ AND f_ing < DATE_SUB(CURDATE(), INTERVAL 5 YEAR);
  
 -- 5.	Eliminar ingresos que tengan el estado finalizado y sean de hace más de 365 días:
 
-DELETE FROM ingresos i
-WHERE datediff(CURRENT_DATE, i.fecha)>=365 AND i.estado = 'pendiente';
+DELETE FROM ingresos
+WHERE datediff(CURRENT_DATE, ingresos.fecha)>=365 AND ingresos.estado = 'pendiente';
 
 
  
@@ -212,7 +216,6 @@ ORDER BY m.cod ASC;
 SELECT c1.nombre ,COUNT(c.id_af) as 'Ventas a eventuales', COUNT(c.id_cr) as 'Ventas a Cronicos'
 FROM comprobantes c NATURAL JOIN farmacia f NATURAL JOIN ciudad c1
 WHERE c1.nombre = 'resistencia' AND 7 >= DATEDIFF(CURRENT_DATE, c.fecha);
-  
 
 -- 4.	 Informar el top de las 5 farmacias que solicitaron mayores cantidades de amoxidal duo en los últimos 15 días. 	
 SELECT f.idFarm, t.cantidad
@@ -232,15 +235,13 @@ from (SELECT s.idFarm,count(*) AS cant
 FROM transferencia t NATURAL JOIN solicita s
 WHERE t.estado = 'pendiente'
 GROUP BY s.idFarm) a);
-  
 
 -- 6.	 Identificar para una farmacia determinada cuales son los medicamentos sin stock en la misma pero con stock en deposito central 
 SELECT p1.idFarm,  m.nombreComer, p1.cantidad, m.stockEnDep
 FROM medicamentos m NATURAL JOIN posee1 p1
 WHERE p1.Cantidad = 0 AND m.stockEnDep > 0;
 
- 
- 
+
 
 -- 7.	¿Cuál es la empresa de transporte con mayor actividad en el último mes? 
 SELECT i.codT, COUNT(*) as envios
@@ -256,12 +257,10 @@ HAVING COUNT(*) = (
         GROUP BY codT
     ) as aux
 );
-  
-
+ 
 -- 8.	Informar el monto total de ventas por farmacia en el último trimestre ordenado en forma descendente.
 SELECT c.idFarm, ROUND(SUM(c.total), 0) AS ganancias
 FROM comprobantes c
 WHERE 90 >= DATEDIFF(CURRENT_DATE,c.fecha)
 GROUP BY c.idFarm
 ORDER by ganancias DESC;
- 
