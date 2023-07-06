@@ -3,7 +3,7 @@ from mysql.connector import Error
 import mysql.connector
 from faker import Faker
 import random
-from datetime import date, timedelta
+
 
 fake = Faker('es_ES')
 

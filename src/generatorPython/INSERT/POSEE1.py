@@ -4,7 +4,7 @@ from mysql.connector import Error
 import mysql.connector
 from faker import Faker
 import random
-from datetime import date, timedelta
+
 
 fake = Faker('es_ES')
 
@@ -14,7 +14,7 @@ data = []
 
 #-->para generar posee 1
 for i in range(1,49):
-    for j in range(1,222):
+    for j in range(1,222): #222 es el limite sup ya que existen 221 medicamentos en este caso.
         cant = random.randint(0, 500)
         data.append((j,i,cant))
 

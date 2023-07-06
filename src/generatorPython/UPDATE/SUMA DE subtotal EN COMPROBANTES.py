@@ -1,6 +1,3 @@
-generador de totales en comprobante
-
-
 from mysql.connector import Error
 import mysql.connector
 from faker import Faker

@@ -1,4 +1,11 @@
-# # para meter datos mas reales hice inserciones con sentencias SQL
+# --> para generar laboratorios
+# # Para introducir datos mas reales se utilizó inserciones con sentencias SQL, pero tambien se podria generar de la siguiente forma:
+
+# for i in range(1, 30):    
+#         cuit = fake.random_int(min=20000000000, max=34999999999)
+#         data.append((cuit, fake.company(), fake.address()))
+
+
 # INSERT INTO Laboratorios (CUIT, razonSocial, domicilio) VALUES ('33177148829', 'Pfizer', '235 East 42nd Street, New York, NY 10017, Estados Unidos');
 # INSERT INTO Laboratorios (CUIT, razonSocial, domicilio) VALUES ('9420858930', 'Novartis', 'Novartis Campus, 4056 Basel, Suiza');
 # INSERT INTO Laboratorios (CUIT, razonSocial, domicilio) VALUES ('1350298512', 'Roche', 'Grenzacherstrasse 124, 4070 Basel, Suiza');
@@ -33,9 +40,3 @@
 
 
 
-
-TAMBIEN SE PODRIA ASI:
-# --> para generar laboratorios
-# for i in range(1, 30):    
-#         cuit = fake.random_int(min=20000000000, max=34999999999)
-#         data.append((cuit, fake.company(), fake.address()))

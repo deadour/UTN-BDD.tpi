@@ -1,4 +1,4 @@
-#--> paa generar comprobantes
+#--> Para generar comprobantes
 
 from pickle import NONE
 from mysql.connector import Error
@@ -41,14 +41,14 @@ try:
 
     for i in range(30000, 40000):
         fecha_aleatoria = fake.date_between(start_date=fecha_inicial, end_date=fecha_actual)
-	idFarmacia=random.randint(1,48)
-        opc=random.randint(1,2)
-        if opc==1:
-            id_af=random.randint(1, 11999) "PORQUE SE CUANTOS AFILIADOS HAY EN TOTAL
-            id_cr=None
+        idFarmacia = random.randint(1, 48)
+        opc = random.randint(1, 2)
+        if opc == 1:
+            id_af = random.randint(1, 11999) 
+            id_cr = None
         else:
-            id_af=None
-            id_cr=random.choice(id_cr_list)
+            id_af = None
+        id_cr = random.choice(id_cr_list)
 
         data.append((i, id_af, id_cr, fecha_aleatoria, 0, idFarmacia))
 

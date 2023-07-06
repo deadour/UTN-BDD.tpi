@@ -1,5 +1,3 @@
-
-
 from mysql.connector import Error
 import mysql.connector
 from faker import Faker

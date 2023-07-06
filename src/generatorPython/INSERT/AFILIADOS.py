@@ -30,7 +30,7 @@ ciudades = [
     "La Coruña"
 ]
 
-for i in range(12000, 16577):
+for i in range(12000, 16577): #EL INDICE HAY QUE ADAPTARLO SEGUN LOS ID QUE NECESITEMOS 
     # id_af = random.randint(1, 1000)  # Genera un ID aleatorio
     # descuento = random.randint(0, 100)  # Genera un descuento aleatorio
     # f_nac = fake.date_of_birth(minimum_age=18, maximum_age=80)  # Genera una fecha de nacimiento aleatoria
@@ -41,6 +41,9 @@ for i in range(12000, 16577):
     # direccion = fake.street_address()  # Genera una dirección aleatoria
     # localidad = fake.city()  # Genera una localidad aleatoria
     # Agrega los datos a la lista
+
+    #PARA GENERAR DE FORMA MAS RAPIDA LA CARGA DE EN LA LISTA NO SE UTLIZARON LAS VARIABLES, ES DECIR, LA COMPLEJIDAD ES MENOR Y POR ENDE EL TIEMPO DE EJECUCIÓN TAMBIEN.
+    
     data.append((i, random.choice(ciudades), fake.address(), random.choice(tipos_dni), fake.date_between(start_date='-5y', end_date='today'), random.randint(10000000, 99999999), 70, fake.name(), fake.date_of_birth(minimum_age=18, maximum_age=80)))
 
 # Establecer la conexión a la base de datos

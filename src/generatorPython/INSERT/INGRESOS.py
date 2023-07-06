@@ -23,7 +23,7 @@ connection = mysql.connector.connect(
 cursor = connection.cursor()
 
 try:
-    # Consulta para obtener los cuit de medicamentos
+    # Consulta para obtener los cuit de los laboratorios
     cursor.execute("SELECT CUIT FROM laboratorios")
 
     # Obtener los resultados de la consulta
@@ -43,7 +43,7 @@ try:
         codT = random.randint(1,30)
         CUIT = cuit_list[ind]
         fecha_aleatoria = fake.date_between(start_date=fecha_inicial, end_date=fecha_actual)
-        estado = random.choice(["terminado", "confección", "terminado", "procesado", "terminado"])
+        estado = random.choice(["terminado", "pendiente", "terminado", "procesado", "terminado"])
         data.append((i, CUIT, codT, fecha_aleatoria, estado))
 
     
