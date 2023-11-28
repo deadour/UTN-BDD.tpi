@@ -23,7 +23,7 @@ En conclusión, este enfoque integral nos permitió aplicar los conocimientos ad
 - Ramírez. Eduardo;
 - Stegmayer, Tobías;
 - Saucedo, Gonzalo;
-- Vallejos Enzo Nahuel.
+- Vallejos, Enzo Nahuel.
 
 
 - Fecha: julio de 2023
